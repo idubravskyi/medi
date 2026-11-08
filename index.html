@@ -6,7 +6,7 @@
 <title>Aprèn jugant</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Nunito:wght@400;600;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700&family=Nunito:wght@400;600;800&family=Rock+Salt&display=swap">
 <style>
 /* Layout: one centred play column like a school worksheet card; subject colour bands, the class maps and three answer colours carry the identity. */
 :root{
@@ -35,6 +35,24 @@ html,body{height:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.45;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
 .app{max-width:640px;margin:0 auto;padding-block:20px 40px;display:flex;flex-direction:column;gap:18px}
+/* Korn wallpaper: only inside the last lesson (aparell circulatori). Dark, scratched, rust red. */
+body.korn{
+  --bg:#0B0A0A; --surface:#1A1615; --ink:#F1E8E4; --muted:#B9AAA3; --line:#3B302C;
+  --river:#F0664D; --good:#6BD69A; --good-bg:#16352A; --bad:#FF9A7A; --bad-bg:#4A2219;
+  --c1:#5A2B2E; --c1-ink:#FFDCE0; --c2:#2F4A2C; --c2-ink:#DAF3CF; --c3:#55471C; --c3-ink:#FFF0B0;
+  --badge:#F0664D; --btn:#B3261E; --btn-ink:#FFFFFF; --ana:#F0664D; --ana-bg:#3A1A17; color-scheme:dark;
+  background:
+    radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(0,0,0,.75) 100%),
+    repeating-linear-gradient(103deg, rgba(160,40,30,.10) 0 2px, transparent 2px 23px),
+    repeating-linear-gradient(-71deg, rgba(120,110,60,.08) 0 1px, transparent 1px 37px),
+    repeating-linear-gradient(12deg, rgba(255,255,255,.035) 0 1px, transparent 1px 9px),
+    #0B0A0A;
+  background-attachment:fixed}
+body.korn::before{content:"KoЯn";position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-12deg);
+  font-family:"Rock Salt", "Comic Sans MS", cursive;font-size:min(34vw, 300px);line-height:1;white-space:nowrap;
+  color:rgba(200,45,30,.22);text-shadow:4px 6px 0 rgba(0,0,0,.6);pointer-events:none;z-index:0}
+body.korn .app{position:relative;z-index:1}
+body.korn .card{box-shadow:0 10px 30px rgba(0,0,0,.6)}
 button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible{outline:3px solid var(--river);outline-offset:2px}
 
@@ -432,7 +450,7 @@ const CIRC_CATS = [
   {k:"menor", ca:"Circulació menor", ua:"Мале коло", cls:"c2"},
   {k:"major", ca:"Circulació major", ua:"Велике коло", cls:"c1"}
 ];
-const L_CIRC = {id:"circ", t:"L’aparell circulatori", tua:"Кровообіг", rounds:[
+const L_CIRC = {id:"circ", t:"L’aparell circulatori", tua:"Кровообіг", wall:"korn", rounds:[
   {id:"words", type:"pick", t:"Paraules importants", tua:"Важливі слова", q:"Quina paraula és?", qu:"Яке це слово?", items:[
     ["Bomba que empeny la sang.","Насос, що перекачує кров.","El cor","Серце"],
     ["Líquid que circula pel cos.","Рідина, що рухається по тілу.","La sang","Кров"],
@@ -518,8 +536,9 @@ const lessonStars = l => l.rounds.reduce((s, r) => s + (best[key(l, r)] || 0), 0
 
 /* ======================= navigation ======================= */
 let NAV = {s:null, l:null};
+const wall = l => document.body.classList.toggle("korn", !!(l && l.wall === "korn"));
 function home(){
-  NAV = {s:null, l:null};
+  NAV = {s:null, l:null}; wall(null);
   $screen.innerHTML = `
   <div class="card">
     <p class="lead">Tria una assignatura. Si t’equivoques, la pregunta torna a sortir més tard.</p>
@@ -538,7 +557,7 @@ function crumbs(parts){
 }
 function wireCrumbs(parts){ $screen.querySelectorAll("[data-crumb]").forEach(b => b.onclick = parts[+b.dataset.crumb].go); }
 function subject(si){
-  NAV = {s:si, l:null};
+  NAV = {s:si, l:null}; wall(null);
   const s = SUBJECTS[si];
   const parts = [{t:"Inici", go:home}, {t:s.t}];
   $screen.innerHTML = `
@@ -559,7 +578,7 @@ function subject(si){
 }
 function lesson(si, li){
   NAV = {s:si, l:li};
-  const s = SUBJECTS[si], l = s.lessons[li];
+  const s = SUBJECTS[si], l = s.lessons[li]; wall(l);
   const parts = [{t:"Inici", go:home}, {t:s.t, go:() => subject(si)}, {t:l.t}];
   $screen.innerHTML = `
   ${crumbs(parts)}
@@ -581,7 +600,7 @@ function lesson(si, li){
 /* ======================= game ======================= */
 let G = null;
 function start(si, li, ri){
-  const l = SUBJECTS[si].lessons[li], r = l.rounds[ri];
+  const l = SUBJECTS[si].lessons[li], r = l.rounds[ri]; wall(l);
   const items = shuffle(r.items);
   G = {si, li, ri, l, r, queue: items, total: items.length, done: 0, mistakes: 0, missed: new Set(), answered: false, showUa: false};
   next();
