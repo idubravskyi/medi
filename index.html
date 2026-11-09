@@ -35,12 +35,12 @@ html,body{height:100%}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.45;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
 .app{max-width:640px;margin:0 auto;padding-block:20px 40px;display:flex;flex-direction:column;gap:18px}
-/* Wallpaper for the last lesson (aparell circulatori): cats.webp, the file next to index.html. Always light so text stays readable on it. */
+/* Wallpaper on every screen: cats.webp, the file next to index.html. Always light so text stays readable on it. */
 body.wall{
   --bg:#FBEBDD; --surface:#FFFFFF; --ink:#15314A; --muted:#566C80; --line:#E6D3C3;
   --river:#1D63C4; --good:#23804E; --good-bg:#DDF3E6; --bad:#B9440F; --bad-bg:#FCE6DA;
   --c1:#F7C9CE; --c1-ink:#6E1A26; --c2:#D2E8C5; --c2-ink:#1F5219; --c3:#F8EDA6; --c3-ink:#5E4900;
-  --badge:#1B3A57; --btn:#1D63C4; --btn-ink:#FFFFFF; --ana:#C2364B; --ana-bg:#F9DEE2; color-scheme:light;
+  --badge:#1B3A57; --btn:#1D63C4; --btn-ink:#FFFFFF; --ana:#C2364B; --ana-bg:#F9DEE2; --geo:#1D63C4; --geo-bg:#DCEAF8; --map-bg:#EEF5FA; color-scheme:light;
   background:linear-gradient(rgba(255,255,255,.45), rgba(255,255,255,.45)), url("cats.webp") center / cover fixed, #FBEBDD}
 body.wall header, body.wall .crumbs{background:rgba(255,255,255,.88);border-radius:14px;padding:8px 12px;width:fit-content;max-width:100%}
 body.wall .card{box-shadow:0 8px 24px rgba(90,50,20,.18)}
@@ -441,7 +441,7 @@ const CIRC_CATS = [
   {k:"menor", ca:"Circulació menor", ua:"Мале коло", cls:"c2"},
   {k:"major", ca:"Circulació major", ua:"Велике коло", cls:"c1"}
 ];
-const L_CIRC = {id:"circ", t:"L’aparell circulatori", tua:"Кровообіг", wall:true, rounds:[
+const L_CIRC = {id:"circ", t:"L’aparell circulatori", tua:"Кровообіг", rounds:[
   {id:"words", type:"pick", t:"Paraules importants", tua:"Важливі слова", q:"Quina paraula és?", qu:"Яке це слово?", items:[
     ["Bomba que empeny la sang.","Насос, що перекачує кров.","El cor","Серце"],
     ["Líquid que circula pel cos.","Рідина, що рухається по тілу.","La sang","Кров"],
@@ -527,7 +527,7 @@ const lessonStars = l => l.rounds.reduce((s, r) => s + (best[key(l, r)] || 0), 0
 
 /* ======================= navigation ======================= */
 let NAV = {s:null, l:null};
-const wall = l => document.body.classList.toggle("wall", !!(l && l.wall));
+const wall = () => document.body.classList.add("wall");
 function home(){
   NAV = {s:null, l:null}; wall(null);
   $screen.innerHTML = `
