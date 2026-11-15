@@ -410,57 +410,72 @@ const CLIMATE_THEORY = [
  {ca:"Les paraules que necessites",ua:"Потрібні поняття"},
  {ca:"Com es llegeix un climograma",ua:"Як читати клімограму"}
 ];
-const theoryPair=(ca,ua)=>`<p>${ca}<span class="ua theory-ua" lang="uk">${ua}</span></p>`;
+const theoryPair=(ca,ua)=>`<p class="sentence-pair"><span lang="ca">${ca}</span><span class="ua theory-ua" lang="uk">${ua}</span></p>`;
 function climateTheoryContent(step){
  if(step===0) return `
   <h3>El clima és el temps habitual d’un lloc<span class="ua theory-ua" lang="uk">Клімат — характерна погода певної місцевості</span></h3>
   ${theoryPair("Per saber com és un clima, mira sobretot <b>la temperatura</b> i <b>les precipitacions</b> al llarg de molts anys.","Щоб описати клімат, зверни увагу насамперед на <b>температуру</b> й <b>опади</b> протягом багатьох років.")}
-  ${theoryPair("Avui pot ploure: això és el <b>temps d’avui</b>. En un lloc sol ploure molt durant molts anys: això descriu el seu <b>clima</b>.","Сьогодні може дощити — це <b>сьогоднішня погода</b>. Якщо місцевість зазвичай має багато опадів протягом багатьох років — це ознака її <b>клімату</b>.")}
+  ${theoryPair("Avui pot ploure: això és el <b>temps d’avui</b>.","Сьогодні може дощити — це <b>сьогоднішня погода</b>.")}
+    ${theoryPair("En un lloc sol ploure molt durant molts anys: això descriu el seu <b>clima</b>.","Якщо в місцевості зазвичай багато дощів протягом багатьох років — це ознака її <b>клімату</b>.")}
   <div class="climate-explain-grid">
    <article class="climate-explain atl"><h3>1 · Atlàntic<span class="ua theory-ua">Атлантичний</span></h3>
     ${theoryPair("<b>On?</b> Al nord i al nord-oest de la península.","<b>Де?</b> На півночі й північному заході півострова.")}
-    ${theoryPair("<b>Com?</b> Temperatures suaus tot l’any: estiu fresc i hivern no gaire fred. Molta pluja, sobretot a l’hivern. Humitat alta.","<b>Який?</b> Помірна температура весь рік: прохолодне літо й не дуже холодна зима. Багато дощів, особливо взимку. Висока вологість.")}
+    ${theoryPair("<b>Com?</b> Temperatures suaus tot l’any: estiu fresc i hivern no gaire fred.","<b>Який?</b> Помірна температура весь рік: прохолодне літо й не дуже холодна зима.")}
+    ${theoryPair("Molta pluja, sobretot a l’hivern.","Багато дощів, особливо взимку.")}
+    ${theoryPair("Humitat alta.","Висока вологість.")}
     <p class="theory-memory">Pluja + verd<span class="ua theory-ua">Дощі + зелень</span></p>
    </article>
    <article class="climate-explain cont"><h3>2 · Mediterrani continental<span class="ua theory-ua">Середземноморський континентальний</span></h3>
     ${theoryPair("<b>On?</b> A la Meseta, a l’interior de la península.","<b>Де?</b> На Месеті, у внутрішній частині півострова.")}
-    ${theoryPair("<b>Com?</b> Estiu molt calorós i hivern molt fred. Poca pluja, sobretot a la tardor. Humitat baixa.","<b>Який?</b> Дуже спекотне літо й дуже холодна зима. Дощів мало, найбільше восени. Низька вологість.")}
+    ${theoryPair("<b>Com?</b> Estiu molt calorós i hivern molt fred.","<b>Який?</b> Дуже спекотне літо й дуже холодна зима.")}
+    ${theoryPair("Poca pluja, sobretot a la tardor.","Дощів мало, найбільше восени.")}
+    ${theoryPair("Humitat baixa.","Низька вологість.")}
     <p class="theory-memory">Estiu calent ↔ hivern fred<span class="ua theory-ua">Спекотне літо ↔ холодна зима</span></p>
    </article>
    <article class="climate-explain lit"><h3>3 · Mediterrani litoral<span class="ua theory-ua">Середземноморський прибережний</span></h3>
     ${theoryPair("<b>On?</b> A la costa de la mar Mediterrània.","<b>Де?</b> На узбережжі Середземного моря.")}
-    ${theoryPair("<b>Com?</b> Hivern suau i estiu calorós. Pluja escassa i irregular, sobretot a la primavera i a la tardor.","<b>Який?</b> М’яка зима й спекотне літо. Мало дощів, вони нерівномірні — переважно навесні та восени.")}
-    ${theoryPair("Les tempestes fortes poden fer sortir els rius del seu llit i causar inundacions. El vent de l’interior pot portar fred; el de l’Àfrica, calor.","Сильні зливи можуть спричинити вихід річок із берегів і повені. Вітер із внутрішньої частини півострова може принести холод; з Африки — спеку.")}
+    ${theoryPair("<b>Com?</b> Hivern suau i estiu calorós.","<b>Який?</b> М’яка зима й спекотне літо.")}
+    ${theoryPair("Pluja escassa i irregular, sobretot a la primavera i a la tardor.","Дощів мало, вони нерівномірні — переважно навесні та восени.")}
+    ${theoryPair("Les tempestes fortes poden fer sortir els rius del seu llit i causar inundacions.","Сильні зливи можуть спричинити вихід річок із берегів і повені.")}
+    ${theoryPair("El vent de l’interior pot portar fred; el de l’Àfrica, calor.","Вітер із внутрішньої частини півострова може принести холод; з Африки — спеку.")}
     <p class="theory-memory">Costa + hivern suau<span class="ua theory-ua">Узбережжя + м’яка зима</span></p>
    </article>
    <article class="climate-explain alt"><h3>4 · Alta muntanya<span class="ua theory-ua">Високогірний</span></h3>
     ${theoryPair("<b>On?</b> A les zones altes dels massissos i les serralades.","<b>Де?</b> На високих ділянках гірських масивів і хребтів.")}
-    ${theoryPair("<b>Com?</b> Temperatures fredes. Nevades freqüents a l’hivern i pluges abundants a l’estiu.","<b>Який?</b> Низька температура. Часті снігопади взимку й рясні дощі влітку.")}
+    ${theoryPair("<b>Com?</b> Temperatures fredes.","<b>Який?</b> Низька температура.")}
+    ${theoryPair("Nevades freqüents a l’hivern i pluges abundants a l’estiu.","Часті снігопади взимку й рясні дощі влітку.")}
     <p class="theory-memory">Altura + fred<span class="ua theory-ua">Висота + холод</span></p>
    </article>
   </div>
   <h3>La diferència que cal recordar<span class="ua theory-ua">Відмінність, яку слід запам’ятати</span></h3>
-  ${theoryPair("Tots dos climes mediterranis tenen estius calorosos. Però a l’<b>interior</b> l’hivern és molt fred, i a la <b>costa</b> és suau.","Обидва середземноморські клімати мають спекотне літо. Але у <b>внутрішній частині</b> півострова зима дуже холодна, а на <b>узбережжі</b> — м’яка.")}`;
+  ${theoryPair("Tots dos climes mediterranis tenen estius calorosos.","Обидва середземноморські клімати мають спекотне літо.")}
+    ${theoryPair("Però a l’<b>interior</b> l’hivern és molt fred, i a la <b>costa</b> és suau.","Але у <b>внутрішній частині</b> півострова зима дуже холодна, а на <b>узбережжі</b> — м’яка.")}`;
  if(step===1)return `
   <h3>Relaciona cada clima amb la vegetació<span class="ua theory-ua">Пов’яжи кожен клімат із рослинністю</span></h3>
-  ${theoryPair("Les plantes d’un lloc estan relacionades amb la temperatura i l’aigua disponible. Aprèn aquests grups del material de classe.","Рослини певної місцевості пов’язані з температурою та кількістю доступної води. Вивчи ці групи зі шкільного матеріалу.")}
+  ${theoryPair("Les plantes d’un lloc estan relacionades amb la temperatura i l’aigua disponible.","Рослини певної місцевості пов’язані з температурою та кількістю доступної води.")}
+    ${theoryPair("Aprèn aquests grups del material de classe.","Вивчи ці групи зі шкільного матеріалу.")}
   <div class="climate-explain-grid">
-   <article class="climate-explain atl"><h3>Atlàntic</h3>
+   <article class="climate-explain atl"><h3>Atlàntic<span class="ua theory-ua" lang="uk">Атлантичний</span></h3>
    ${theoryPair("<b>Boscos caducifolis:</b> roure, faig, freixe i castanyer.","<b>Листопадні ліси:</b> дуб, бук, ясен і каштан.")}
-   ${theoryPair("<b>Sotabosc:</b> arbustos, falgueres i molses. <b>Prats:</b> verds tot l’any.","<b>Підлісок:</b> кущі, папороті й мохи. <b>Луки:</b> зелені весь рік.")}</article>
-   <article class="climate-explain cont"><h3>Mediterrani continental</h3>
-   ${theoryPair("<b>Boscos perennifolis:</b> alzina i pi. Grans zones de matollar amb plantes aromàtiques.","<b>Вічнозелені ліси:</b> кам’яний дуб і сосна. Великі ділянки чагарників з ароматичними рослинами.")}</article>
-   <article class="climate-explain lit"><h3>Mediterrani litoral</h3>
-   ${theoryPair("<b>Pinedes i alzinars.</b> Sotabosc dens: bruc, esbarzer, arboç i lligabosc.","<b>Соснові ліси й ліси кам’яного дуба.</b> Густий підлісок: еріка, ожина, суничне дерево й жимолость.")}
+   ${theoryPair("<b>Sotabosc:</b> arbustos, falgueres i molses.","<b>Підлісок:</b> кущі, папороті й мохи.")}
+    ${theoryPair("<b>Prats:</b> verds tot l’any.","<b>Луки:</b> зелені весь рік.")}</article>
+   <article class="climate-explain cont"><h3>Mediterrani continental<span class="ua theory-ua" lang="uk">Середземноморський континентальний</span></h3>
+   ${theoryPair("<b>Boscos perennifolis:</b> alzina i pi.","<b>Вічнозелені ліси:</b> кам’яний дуб і сосна.")}
+    ${theoryPair("Grans zones de matollar amb plantes aromàtiques.","Великі ділянки чагарників з ароматичними рослинами.")}</article>
+   <article class="climate-explain lit"><h3>Mediterrani litoral<span class="ua theory-ua" lang="uk">Середземноморський прибережний</span></h3>
+   ${theoryPair("<b>Pinedes i alzinars.</b>","<b>Соснові ліси й ліси кам’яного дуба.</b>")}
+    ${theoryPair("Sotabosc dens: bruc, esbarzer, arboç i lligabosc.","Густий підлісок: еріка, ожина, суничне дерево й жимолость.")}
    ${theoryPair("Al sud peninsular: plantes baixes, bosquines i màquies.","На півдні півострова: невисокі рослини, низьколісся й маквіс.")}</article>
   </div>
   <h3>A la muntanya la vegetació canvia amb l’altura<span class="ua theory-ua">У горах рослинність змінюється з висотою</span></h3>
   <div class="mountain-levels" role="img" aria-label="De dalt a baix: prats; pi negre i avet; faig i roure">
-   <div class="mountain-level top"><b>Zones altes · Més fred</b><br>Prats<span class="ua theory-ua">Найвищі ділянки · Найхолодніше<br>Луки</span></div>
-   <div class="mountain-level mid"><b>Zones intermèdies</b><br>Pi negre i avet<span class="ua theory-ua">Середні ділянки<br>Гірська сосна й ялиця</span></div>
-   <div class="mountain-level low"><b>Zones baixes · Menys fred</b><br>Faig i roure<span class="ua theory-ua">Нижчі ділянки · Менш холодно<br>Бук і дуб</span></div>
+   <div class="mountain-level top"><b lang="ca">Zones altes · Més fred</b><span class="ua theory-ua" lang="uk">Найвищі ділянки · Найхолодніше</span><span lang="ca">Prats</span><span class="ua theory-ua" lang="uk">Луки</span></div>
+   <div class="mountain-level mid"><b lang="ca">Zones intermèdies</b><span class="ua theory-ua" lang="uk">Середні ділянки</span><span lang="ca">Pi negre i avet</span><span class="ua theory-ua" lang="uk">Гірська сосна й ялиця</span></div>
+   <div class="mountain-level low"><b lang="ca">Zones baixes · Menys fred</b><span class="ua theory-ua" lang="uk">Нижчі ділянки · Менш холодно</span><span lang="ca">Faig i roure</span><span class="ua theory-ua" lang="uk">Бук і дуб</span></div>
   </div>
-  ${theoryPair("<b>Caducifoli:</b> perd les fulles en una època de l’any. <b>Perennifoli:</b> té fulles verdes tot l’any. L’<b>alzina</b> és un roure perennifoli.","<b>Листопадний:</b> скидає листя в певну пору року. <b>Вічнозелений:</b> має зелене листя весь рік. <b>Кам’яний дуб</b> — вічнозелений дуб.")}`;
+  ${theoryPair("<b>Caducifoli:</b> perd les fulles en una època de l’any.","<b>Листопадний:</b> скидає листя в певну пору року.")}
+    ${theoryPair("<b>Perennifoli:</b> té fulles verdes tot l’any.","<b>Вічнозелений:</b> має зелене листя весь рік.")}
+    ${theoryPair("L’<b>alzina</b> és un roure perennifoli.","<b>Кам’яний дуб</b> — вічнозелений дуб.")}`;
  if(step===2){
   const words=[
    ["Clima","Temps que sol fer en un lloc al llarg de molts anys.","Клімат","Погода, характерна для місцевості протягом багатьох років."],
@@ -478,25 +493,42 @@ function climateTheoryContent(step){
   return `<h3>Definicions curtes<span class="ua theory-ua">Короткі визначення</span></h3>
    <dl class="theory-words">${words.map(([ca,d,ua,u])=>`<div><dt>${ca}${SPEAK(ca)}</dt><dd>${d}<span class="ua theory-ua" lang="uk"><b>${ua}:</b> ${u}</span></dd></div>`).join("")}</dl>
    <h3>Paraules de la taula<span class="ua theory-ua">Слова з таблиці</span></h3>
-   ${theoryPair("<b>Suau:</b> ni molt fred ni molt calent. <b>Escassa:</b> poca. <b>Irregular:</b> varia molt.","<b>Помірна:</b> не дуже холодна й не дуже висока. <b>Нечисленні:</b> їх мало. <b>Нерівномірні:</b> сильно змінюються.")}
-   ${theoryPair("<b>Litoral:</b> costa. <b>Continental:</b> interior. <b>P. I.:</b> península Ibèrica.","<b>Прибережний:</b> на узбережжі. <b>Континентальний:</b> у внутрішній частині. <b>P. I.:</b> Піренейський півострів.")}`;
+   ${theoryPair("<b>Suau:</b> ni molt fred ni molt calent.","<b>Помірна:</b> не дуже холодна й не дуже висока.")}
+    ${theoryPair("<b>Escassa:</b> poca.","<b>Незначна:</b> її мало.")}
+    ${theoryPair("<b>Irregular:</b> varia molt.","<b>Нерівномірна:</b> сильно змінюється.")}
+   ${theoryPair("<b>Litoral:</b> costa.","<b>Прибережний:</b> на узбережжі.")}
+    ${theoryPair("<b>Continental:</b> interior.","<b>Континентальний:</b> у внутрішній частині.")}
+    ${theoryPair("<b>P. I.:</b> península Ibèrica.","<b>P. I.:</b> Піренейський півострів.")}`;
  }
  return `
   <h3>Dos gràfics en un<span class="ua theory-ua">Два графіки в одному</span></h3>
-  ${theoryPair("Un climograma mostra la <b>temperatura mitjana</b> i les <b>precipitacions</b> de cada mes. No descriu un sol dia.","Клімограма показує <b>середню температуру</b> й <b>опади</b> за кожен місяць. Вона не описує лише один день.")}
-  <figure class="climate-chart"><img src="${CLIMATE_CHART}" alt="Climograma original de Girona. Temperatura a la dreta, precipitacions a l’esquerra."><figcaption>Girona · Material de classe, pàg. 18</figcaption></figure>
+  ${theoryPair("Un climograma mostra la <b>temperatura mitjana</b> i les <b>precipitacions</b> de cada mes.","Клімограма показує <b>середню температуру</b> й <b>опади</b> за кожен місяць.")}
+    ${theoryPair("No descriu un sol dia.","Вона не описує лише один день.")}
+  <figure class="climate-chart"><img src="${CLIMATE_CHART}" alt="Climograma original de Girona. Temperatura a la dreta, precipitacions a l’esquerra."><figcaption><span lang="ca">Girona · Material de classe, pàg. 18</span><span class="theory-ua" lang="uk">Жирона · Шкільний матеріал, с. 18</span></figcaption></figure>
   <ol class="theory-read">
-   <li>${theoryPair("<b>Tria el mes.</b> Busca el seu nom a la part de baix del gràfic.","<b>Обери місяць.</b> Знайди його назву внизу графіка.")}</li>
-   <li>${theoryPair("<b>Per llegir la pluja:</b> mira l’altura de la barra blava i segueix fins a l’escala de l’<b>esquerra</b>. La unitat és <b>mm</b>.","<b>Щоб зчитати опади:</b> подивись на висоту синього стовпчика й зістав її зі шкалою <b>ліворуч</b>. Одиниця — <b>мм</b>.")}</li>
-   <li>${theoryPair("<b>Per llegir la temperatura:</b> mira la línia vermella i segueix fins a l’escala de la <b>dreta</b>. La unitat és <b>°C</b>.","<b>Щоб зчитати температуру:</b> подивись на червону лінію й зістав її зі шкалою <b>праворуч</b>. Одиниця — <b>°C</b>.")}</li>
+   <li>${theoryPair("<b>Tria el mes.</b>","<b>Обери місяць.</b>")}
+    ${theoryPair("Busca el seu nom a la part de baix del gràfic.","Знайди його назву внизу графіка.")}</li>
+   <li>${theoryPair("<b>Per llegir la pluja:</b> mira l’altura de la barra blava i segueix fins a l’escala de l’<b>esquerra</b>.","<b>Щоб зчитати опади:</b> подивись на висоту синього стовпчика й зістав її зі шкалою <b>ліворуч</b>.")}
+    ${theoryPair("La unitat és <b>mm</b>.","Одиниця — <b>мм</b>.")}</li>
+   <li>${theoryPair("<b>Per llegir la temperatura:</b> mira la línia vermella i segueix fins a l’escala de la <b>dreta</b>.","<b>Щоб зчитати температуру:</b> подивись на червону лінію й зістав її зі шкалою <b>праворуч</b>.")}
+    ${theoryPair("La unitat és <b>°C</b>.","Одиниця — <b>°C</b>.")}</li>
   </ol>
   <h3>Fem-ho amb el juliol<span class="ua theory-ua">Спробуємо на прикладі липня</span></h3>
-  ${theoryPair("La barra blava de <b>juliol</b> arriba a uns <b>30 mm</b> a l’esquerra. La línia vermella marca uns <b>23 °C</b> a la dreta.","Синій стовпчик <b>липня</b> сягає приблизно <b>30 мм</b> за лівою шкалою. Червона лінія показує приблизно <b>23 °C</b> за правою шкалою.")}
-  ${theoryPair("<b>Compte!</b> No llegeixis la línia vermella amb l’escala dels mm: obtindries un número incorrecte. Cada gràfic té la seva escala.","<b>Увага!</b> Не читай червону лінію за шкалою мм: отримаєш неправильне число. Кожен графік має свою шкалу.")}
-  ${theoryPair("El mes amb <b>més pluja</b> és octubre. El mes amb <b>menys pluja</b> és juliol. La temperatura més alta és al juliol i a l’agost; la més baixa, al gener.","<b>Найбільше опадів</b> у жовтні, <b>найменше</b> — у липні. Найвища температура в липні й серпні; найнижча — у січні.")}
+  ${theoryPair("La barra blava de <b>juliol</b> arriba a uns <b>30 mm</b> a l’esquerra.","Синій стовпчик <b>липня</b> сягає приблизно <b>30 мм</b> за лівою шкалою.")}
+    ${theoryPair("La línia vermella marca uns <b>23 °C</b> a la dreta.","Червона лінія показує приблизно <b>23 °C</b> за правою шкалою.")}
+  ${theoryPair("<b>Compte!</b>","<b>Увага!</b>")}
+    ${theoryPair("No llegeixis la línia vermella amb l’escala dels mm: obtindries un número incorrecte.","Не читай червону лінію за шкалою мм: отримаєш неправильне число.")}
+    ${theoryPair("Cada gràfic té la seva escala.","Кожен графік має свою шкалу.")}
+  ${theoryPair("El mes amb <b>més pluja</b> és octubre.","<b>Найбільше опадів</b> у жовтні.")}
+    ${theoryPair("El mes amb <b>menys pluja</b> és juliol.","<b>Найменше опадів</b> у липні.")}
+    ${theoryPair("La temperatura més alta és al juliol i a l’agost; la més baixa, al gener.","Найвища температура в липні й серпні; найнижча — у січні.")}
   <h3>Què volen dir les dades anuals?<span class="ua theory-ua">Що означають річні показники?</span></h3>
-  ${theoryPair("<b>P anual: 724 mm.</b> És tota la precipitació de l’any indicada al gràfic. <b>T anual: 14,3 °C.</b> És la temperatura mitjana anual indicada.","<b>P anual: 724 мм.</b> Загальна кількість опадів за рік, указана на графіку. <b>T anual: 14,3 °C.</b> Указана середня річна температура.")}
-  ${theoryPair("L’<b>altitud: 127 m</b> és l’altura del lloc respecte al nivell del mar. No és una temperatura ni una quantitat de pluja.","<b>Висота: 127 м</b> — висота місцевості над рівнем моря. Це не температура й не кількість опадів.")}`;
+  ${theoryPair("<b>P anual: 724 mm.</b>","<b>Річні опади: 724 мм.</b>")}
+    ${theoryPair("És tota la precipitació de l’any indicada al gràfic.","Це загальна кількість опадів за рік, указана на графіку.")}
+    ${theoryPair("<b>T anual: 14,3 °C.</b>","<b>Середня річна температура: 14,3 °C.</b>")}
+    ${theoryPair("És la temperatura mitjana anual indicada.","Це середня температура за рік, указана на графіку.")}
+  ${theoryPair("L’<b>altitud: 127 m</b> és l’altura del lloc respecte al nivell del mar.","<b>Висота: 127 м</b> — висота місцевості над рівнем моря.")}
+    ${theoryPair("No és una temperatura ni una quantitat de pluja.","Це не температура й не кількість опадів.")}`;
 }
 function climateTheory(si,li,step=0){
  NAV={s:si,l:li};wall();

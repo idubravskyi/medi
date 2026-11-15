@@ -225,3 +225,8 @@ body{margin:0}.app,.card,.game-content,.list>*{min-width:0;box-sizing:border-box
  .topbar{flex-wrap:wrap}.topbar .progress{min-width:100px}
  .theory p{max-width:86ch}.foot{font-size:.95rem}
 }
+/* Keep each original sentence with its translation, including print output. */
+.sentence-pair{break-inside:avoid;page-break-inside:avoid}
+.theory .sentence-pair{margin:14px 0 18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sentence-pair>[lang=ca]{display:block}.sentence-pair>.theory-ua{margin-top:6px}
+.theory-words>div{break-inside:avoid}.mountain-level>.theory-ua{margin-bottom:10px}.mountain-level>.theory-ua:last-child{margin-bottom:0}
