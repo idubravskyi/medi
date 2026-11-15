@@ -183,3 +183,45 @@ h2{font-family:var(--f-display);font-size:1.35rem;margin:0;text-wrap:balance}
 
 
 a.item{font:inherit;color:inherit;text-decoration:none}a.item:focus-visible{outline:3px solid var(--river);outline-offset:2px}
+/* Tablet-first touch controls; keep browser zoom and portrait layouts available. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+button,select,input,summary,a.action{touch-action:manipulation}
+button,select,input:not([type=checkbox]):not([type=radio]),summary{min-height:44px;box-sizing:border-box}
+button,a,input,select,summary{-webkit-tap-highlight-color:rgba(29,99,196,.15)}
+input,select,textarea{font-size:16px;max-width:100%}
+img,svg{max-width:100%}
+@media(hover:none){button:hover:not(:disabled){transform:none}}
+
+body{margin:0}.app,.card,.game-content,.list>*{min-width:0;box-sizing:border-box}
+.crumbs button,.crumbs a{display:inline-flex;align-items:center;min-height:44px}
+.speak{width:48px;height:48px}.hint{min-height:44px;padding:10px}
+.game-content{display:flex;flex-direction:column;gap:16px}
+@media(min-width:960px) and (orientation:landscape){
+ .app{max-width:1180px;padding-block:16px 28px;gap:12px}
+ body.wall{background-attachment:scroll}
+ .card{padding:24px;gap:18px}body{font-size:18px}
+ header h1{font-size:1.65rem}.sub{font-size:1rem}
+ .list{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+ .item{min-height:90px;padding:16px;gap:12px}.item .t{font-size:1.12rem}.item .d{font-size:1rem}
+ .item>span{min-width:0}.item .meta{white-space:normal;text-align:right}
+ .subjects{gap:20px}.subject{min-height:190px;padding:24px}
+ .game-content{gap:16px}.game-content:not(.game-map):not(.game-chart):not(.game-order){width:100%;max-width:960px;align-self:center}
+ .big{min-height:96px}.big .def{font-size:1.4rem;max-width:48ch;line-height:1.45}
+ .choices{gap:12px}.opt{min-height:72px;padding:16px;font-size:1.12rem}.opt small,.tile small{font-size:.92rem}
+ .game-map,.game-chart{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:start;gap:16px 24px}
+ .game-map>.prompt,.game-chart>.prompt{grid-column:1/-1}
+ .game-map>.map{grid-column:1;grid-row:2 / span 3;min-width:0;width:100%}
+ .game-map>.choices{grid-column:2;grid-row:2;grid-template-columns:1fr}
+ .game-map>.uabox{grid-column:2;grid-row:3}
+ .game-chart>.climate-chart{grid-column:1;grid-row:2 / span 3;margin:0;padding:8px;min-width:0}
+ .game-chart>.big{grid-column:2;grid-row:2;min-height:0}.game-chart>.big .def{font-size:1.25rem}
+ .game-chart>.choices{grid-column:2;grid-row:3}.game-chart>.uabox{grid-column:2;grid-row:4}
+ .game-order{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:18px 24px}
+ .game-order>.prompt,.game-order>.uabox{grid-column:1/-1}
+ .game-order>.order-done{grid-column:1}.game-order>.tiles{grid-column:2;align-content:start}
+ .tile{min-height:52px}.theory-nav{grid-template-columns:repeat(4,minmax(0,1fr))}
+ .theory-words{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px}
+ .theory .climate-chart{max-width:780px;align-self:center}
+ .topbar{flex-wrap:wrap}.topbar .progress{min-width:100px}
+ .theory p{max-width:86ch}.foot{font-size:.95rem}
+}

@@ -706,7 +706,7 @@ function draw(fb){
       <div class="progress" role="progressbar" aria-valuenow="${pct}" aria-valuemin="0" aria-valuemax="100"><span style="width:${pct}%"></span></div>
       <span class="count">${G.done}/${G.total}</span>
     </div>
-    ${body()}
+    <div class="game-content game-${G.r.type}${G.r.chart ? " game-chart" : ""}">${body()}</div>
     ${hint}
     ${fb || ""}
   </div>`;
