@@ -614,6 +614,7 @@ function crumbs(parts){
   return `<div class="crumbs">${parts.map((p,i) => p.go ? `<button data-crumb="${i}">${p.t}</button>` : `<span>${p.t}</span>`).join(" <span>›</span> ")}</div>`;
 }
 function wireCrumbs(parts){ $screen.querySelectorAll("[data-crumb]").forEach(b => b.onclick = parts[+b.dataset.crumb].go); }
+const LESSON_ART = {"pen": "assets/wallpapers/peninsula.webp", "rel": "assets/wallpapers/relleu.webp", "cost": "assets/wallpapers/costes.webp", "rius": "assets/wallpapers/rius.webp", "clima": "assets/wallpapers/clima.webp", "uri": "assets/wallpapers/urinari.webp", "circ": "assets/wallpapers/circulatori.webp"};
 function subject(si){
   NAV = {s:si, l:null}; wall(null);
   const s = SUBJECTS[si];
@@ -625,7 +626,7 @@ function subject(si){
     <div class="list">
       ${s.lessons.map((l,i) => `
       <a class="item" href="${LESSON_FILES[l.id]}" data-l="${i}">
-        <span class="num">${i+1}</span>
+        <img class="lesson-cover" src="${LESSON_ART[l.id]}" alt="" loading="lazy" width="104" height="66">
         <span><span class="t">${l.t}</span><span class="d">${l.tua}${l.date ? " · " + l.date : ""} · ${l.rounds.length} jocs</span></span>
         <span class="meta">★ ${lessonStars(l)}/${l.rounds.length * 3}</span>
       </a>`).join("")}
@@ -640,7 +641,7 @@ function lesson(si, li){
   $screen.innerHTML = `
   ${crumbs(parts)}
   <div class="card">
-    <div class="lesson-heading"><h2>${l.t} <span class="ua">· ${l.tua}</span></h2><button class="ghost reset-icon" id="lesson-reset" aria-label="Reinicia els resultats · Скинути результати уроку" title="Скинути результати уроку" aria-expanded="false" aria-controls="reset-confirm"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18M9 6V4h6v2M5 6l1 14h12l1-14M10 10v6M14 10v6"/></svg></button></div>
+    <div class="lesson-heading"><img class="lesson-cover" src="${LESSON_ART[l.id]}" alt="" width="112" height="70"><h2>${l.t} <span class="ua">· ${l.tua}</span></h2><button class="ghost reset-icon" id="lesson-reset" aria-label="Reinicia els resultats · Скинути результати уроку" title="Скинути результати уроку" aria-expanded="false" aria-controls="reset-confirm"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18M9 6V4h6v2M5 6l1 14h12l1-14M10 10v6M14 10v6"/></svg></button></div>
     <div class="lesson-reset">
       
       <div class="reset-confirm" id="reset-confirm" hidden>
@@ -859,6 +860,7 @@ function result(){
   document.getElementById("up").onclick = () => lesson(G.si, G.li);
   const go = document.getElementById("go"); if(go) go.onclick = () => start(G.si, G.li, G.ri + 1);
 }
+
 /* Lesson 7: vocabulary cards, searchable glossary and short recall sessions. */
 let CV=null;
 function climateVocab(si,li,ri){
@@ -911,7 +913,6 @@ function drawClimateVocab(){
  const errors=document.getElementById('vocab-errors');if(errors)errors.onclick=()=>beginVocabQuiz(CV.answers.filter(a=>!a.ok).map(a=>CLIMATE_VOCAB.find(w=>w.id===a.id)));
  const search=document.getElementById('vocab-search');if(search)search.oninput=()=>{const pos=search.selectionStart;CV.query=search.value;drawClimateVocab();const next=document.getElementById('vocab-search');next.focus();if(pos!==null)try{next.setSelectionRange(pos,pos)}catch(e){}};
 }
-
 
 /* Each lesson has its own HTML document. Hash routes select its theory or game.
    Stable lesson and round IDs keep the existing localStorage results. */
@@ -984,3 +985,4 @@ function routePage(){
 window.addEventListener("popstate",()=>{routePage();revealTop()});
 window.addEventListener("hashchange",()=>{routePage();revealTop()});
 routePage();
+
