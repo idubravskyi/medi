@@ -638,15 +638,6 @@ function lesson(si, li){
   ${crumbs(parts)}
   <div class="card">
     <h2>${l.t} <span class="ua">· ${l.tua}</span></h2>
-    <div class="list">
-      ${l.id==="clima" ? `<button class="item" id="theory-open"><span class="num">0</span><span><span class="t">Entén la teoria</span><span class="d">Пояснення перед вправами · 4 parts</span></span><span aria-hidden="true">→</span></button>` : ""}
-      ${l.rounds.map((r,i) => `
-      <button class="item" data-r="${i}">
-        <span class="num">${i+1}</span>
-        <span><span class="t">${r.t}</span><span class="d">${r.tua} · ${r.items.length} ${r.type === "order" ? "reptes" : "preguntes"}</span></span>
-        ${starsHtml(best[key(l, r)] || 0)}
-      </button>`).join("")}
-    </div>
     <div class="lesson-reset">
       <button class="ghost reset-trigger" id="lesson-reset" aria-expanded="false" aria-controls="reset-confirm"><span lang="ca">Reinicia els resultats</span><span class="ua" lang="uk">Скинути результати уроку</span></button>
       <div class="reset-confirm" id="reset-confirm" hidden>
@@ -657,6 +648,16 @@ function lesson(si, li){
       </div>
       <p class="reset-status ua" id="reset-status" role="status" hidden></p>
     </div>
+    <div class="list">
+      ${l.id==="clima" ? `<button class="item" id="theory-open"><span class="num">0</span><span><span class="t">Entén la teoria</span><span class="d">Пояснення перед вправами · 4 parts</span></span><span aria-hidden="true">→</span></button>` : ""}
+      ${l.rounds.map((r,i) => `
+      <button class="item" data-r="${i}">
+        <span class="num">${i+1}</span>
+        <span><span class="t">${r.t}</span><span class="d">${r.tua} · ${r.items.length} ${r.type === "order" ? "reptes" : "preguntes"}</span></span>
+        ${starsHtml(best[key(l, r)] || 0)}
+      </button>`).join("")}
+    </div>
+
   </div>`;
   wireCrumbs(parts);
   $screen.querySelectorAll("[data-r]").forEach(b => b.onclick = () => start(si, li, +b.dataset.r));
