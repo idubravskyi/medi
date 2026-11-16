@@ -637,9 +637,9 @@ function lesson(si, li){
   $screen.innerHTML = `
   ${crumbs(parts)}
   <div class="card">
-    <h2>${l.t} <span class="ua">· ${l.tua}</span></h2>
+    <div class="lesson-heading"><h2>${l.t} <span class="ua">· ${l.tua}</span></h2><button class="ghost reset-icon" id="lesson-reset" aria-label="Reinicia els resultats · Скинути результати уроку" title="Скинути результати уроку" aria-expanded="false" aria-controls="reset-confirm"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h18M9 6V4h6v2M5 6l1 14h12l1-14M10 10v6M14 10v6"/></svg></button></div>
     <div class="lesson-reset">
-      <button class="ghost reset-trigger" id="lesson-reset" aria-expanded="false" aria-controls="reset-confirm"><span lang="ca">Reinicia els resultats</span><span class="ua" lang="uk">Скинути результати уроку</span></button>
+      
       <div class="reset-confirm" id="reset-confirm" hidden>
         <p><span lang="ca">Vols esborrar els resultats de <b>${esc(l.t)}</b>?</span><span class="ua theory-ua" lang="uk">Скинути результати уроку <b>${esc(l.tua)}</b>?</span></p>
         <p class="ua">Буде скинуто всі зірочки цього уроку лише в цьому браузері. Результати інших уроків залишаться.</p>
