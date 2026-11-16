@@ -647,10 +647,42 @@ function lesson(si, li){
         ${starsHtml(best[key(l, r)] || 0)}
       </button>`).join("")}
     </div>
+    <div class="lesson-reset">
+      <button class="ghost reset-trigger" id="lesson-reset" aria-expanded="false" aria-controls="reset-confirm"><span lang="ca">Reinicia els resultats</span><span class="ua" lang="uk">Скинути результати уроку</span></button>
+      <div class="reset-confirm" id="reset-confirm" hidden>
+        <p><span lang="ca">Vols esborrar els resultats de <b>${esc(l.t)}</b>?</span><span class="ua theory-ua" lang="uk">Скинути результати уроку <b>${esc(l.tua)}</b>?</span></p>
+        <p class="ua">Буде скинуто всі зірочки цього уроку лише в цьому браузері. Результати інших уроків залишаться.</p>
+        <div class="row"><button class="ghost reset-trigger" id="reset-confirm-yes"><span lang="ca">Sí, reinicia</span><span class="ua" lang="uk">Так, скинути</span></button><button class="ghost" id="reset-cancel"><span lang="ca">Cancel·la</span><span class="ua" lang="uk">Скасувати</span></button></div>
+        <p id="reset-error" role="alert" hidden></p>
+      </div>
+      <p class="reset-status ua" id="reset-status" role="status" hidden></p>
+    </div>
   </div>`;
   wireCrumbs(parts);
   $screen.querySelectorAll("[data-r]").forEach(b => b.onclick = () => start(si, li, +b.dataset.r));
   const theoryOpen=document.getElementById("theory-open");if(theoryOpen)theoryOpen.onclick=()=>climateTheory(si,li);
+  const resetButton=document.getElementById("lesson-reset"),resetPanel=document.getElementById("reset-confirm");
+  resetButton.onclick=()=>{resetPanel.hidden=false;resetButton.setAttribute("aria-expanded","true");document.getElementById("reset-cancel").focus();};
+  document.getElementById("reset-cancel").onclick=()=>{resetPanel.hidden=true;resetButton.setAttribute("aria-expanded","false");resetButton.focus();};
+  document.getElementById("reset-confirm-yes").onclick=()=>resetLessonResults(si,li);
+}
+function resetLessonResults(si,li){
+  const l=SUBJECTS[si].lessons[li];
+  // Read the latest saved scores so resetting one lesson preserves other lessons.
+  const current=store.get("apren-best")||best;
+  const nextBest=Object.fromEntries(Object.entries(current).filter(([k])=>!k.startsWith(l.id+".")));
+  try{localStorage.setItem("apren-best",JSON.stringify(nextBest));}
+  catch(e){
+    const error=document.getElementById("reset-error");
+    error.hidden=false;error.textContent="Не вдалося скинути результати. Дозволь збереження даних для цього сайту й спробуй ще раз.";
+    return;
+  }
+  best=nextBest;
+  if(G&&G.l.id===l.id)G=null;
+  lesson(si,li);
+  const status=document.getElementById("reset-status");
+  status.hidden=false;status.textContent="Resultats reiniciats. · Результати цього уроку скинуто.";
+  document.getElementById("lesson-reset").focus();
 }
 
 /* ======================= game ======================= */

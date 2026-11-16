@@ -230,3 +230,14 @@ body{margin:0}.app,.card,.game-content,.list>*{min-width:0;box-sizing:border-box
 .theory .sentence-pair{margin:14px 0 18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
 .sentence-pair>[lang=ca]{display:block}.sentence-pair>.theory-ua{margin-top:6px}
 .theory-words>div{break-inside:avoid}.mountain-level>.theory-ua{margin-bottom:10px}.mountain-level>.theory-ua:last-child{margin-bottom:0}
+
+/* Per-lesson progress reset with an explicit, touch-friendly confirmation. */
+.lesson-reset{border-top:1px solid var(--line);padding-top:18px;margin-top:6px}
+.lesson-reset button{min-height:48px;white-space:normal}
+.lesson-reset button>span{display:block}
+.lesson-reset .reset-trigger{color:var(--bad);border-color:var(--bad)}
+.reset-confirm{margin-top:14px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--bg)}
+.reset-confirm p{margin:0 0 14px}.reset-confirm .row{justify-content:flex-start}
+.reset-confirm .row button{flex:1 1 180px}
+.reset-confirm[hidden],.reset-status[hidden],#reset-error[hidden]{display:none}
+.reset-status{margin:14px 0 0}#reset-error{color:var(--bad);margin:14px 0 0}
