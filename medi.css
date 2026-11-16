@@ -252,3 +252,31 @@ body{margin:0}.app,.card,.game-content,.list>*{min-width:0;box-sizing:border-box
 .lesson-heading .reset-icon{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;min-height:44px;padding:0;border-radius:12px;color:var(--bad);border:1px solid var(--line);background:transparent}
 .reset-icon svg{display:block;width:22px;height:22px;pointer-events:none}
 .lesson-reset{display:contents}
+/* Climate vocabulary: readable cards and touch-sized controls on landscape iPad. */
+.climate-vocab .vocab-top{justify-content:flex-start;align-items:center;gap:20px}
+.climate-vocab .vocab-top h2{flex:1}.climate-vocab button>span{display:block}
+.vocab-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.vocab-tabs button{min-height:60px;border-radius:12px}.vocab-tabs [aria-current=page]{background:var(--geo-bg);border-color:var(--geo)}
+.vocab-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.vocab-controls label,.climate-vocab label{display:block;font-weight:800;margin-bottom:8px}
+.climate-vocab select,.climate-vocab input{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;width:100%;min-height:48px;box-sizing:border-box;min-width:0;max-width:100%}
+.vocab-content{display:flex;flex-direction:column;gap:18px;min-width:0}.vocab-count{margin:0;font-weight:800;color:var(--muted)}
+.vocab-flash{padding:28px;background:var(--bg);border:1px solid var(--line);border-radius:18px;text-align:center}
+.vocab-flash .word,.vocab-question .word{font-size:clamp(1.5rem,3vw,2.2rem);overflow-wrap:anywhere}
+.vocab-translation{font-size:1.18rem;font-weight:800;margin:8px 0 14px;color:var(--good)}
+.vocab-glossary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.vocab-glossary article{border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
+.vocab-term{display:flex;align-items:center;justify-content:space-between;gap:10px}.vocab-term .speak{flex:none}
+.vocab-score{display:flex;align-items:center;gap:16px}.vocab-score h3{font-size:1.6rem;margin:0}
+.climate-vocab .sentence-pair{margin:10px 0;line-height:1.5}.climate-vocab .opt{min-height:72px;padding:16px;overflow-wrap:anywhere}
+@media(min-width:960px) and (orientation:landscape){.vocab-flash{max-width:900px;align-self:center;width:100%;box-sizing:border-box}.vocab-controls{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}}
+@media(max-width:700px){.vocab-controls,.vocab-glossary{grid-template-columns:1fr}.vocab-tabs{gap:8px}.vocab-tabs button{padding:10px 6px}.vocab-flash{padding:20px}.climate-vocab .vocab-top h2{flex-basis:100%}}
+
+.climate-vocab .vocab-top>.ghost{flex:0 0 auto;padding:8px 14px;min-height:48px}
+.climate-vocab>p.ua{margin:0}
+@media(min-width:960px) and (orientation:landscape){
+ .climate-vocab{gap:12px;padding:20px}.climate-vocab .vocab-top{gap:16px}
+ .vocab-tabs button{min-height:52px;padding:8px 12px}.vocab-tabs .theory-ua{margin-top:3px}
+ .vocab-content{gap:12px}.vocab-flash{padding:18px 24px}.vocab-flash .big{min-height:62px}
+ .vocab-flash .sentence-pair{margin:8px 0}.vocab-flash .vocab-translation{margin:6px 0 10px}
+}
