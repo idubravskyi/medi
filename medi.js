@@ -861,16 +861,16 @@ function result(){
   const go = document.getElementById("go"); if(go) go.onclick = () => start(G.si, G.li, G.ri + 1);
 }
 
-/* Lesson 7: vocabulary cards, searchable glossary and short recall sessions. */
+/* Lesson 7: vocabulary cards, searchable glossary and complete recall sessions. */
 let CV=null;
 function climateVocab(si,li,ri){
  G=null;wall();
- CV={si,li,ri,group:'concepts',view:'learn',pos:0,direction:'ca-uk',pool:[],answers:[],choice:null,opts:[],query:''};
+ CV={si,li,ri,group:'all',view:'learn',pos:0,direction:'ca-uk',pool:[],answers:[],choice:null,opts:[],query:''};
  drawClimateVocab();
 }
 function vocabWords(){return CLIMATE_VOCAB.filter(w=>CV.group==='all'||w.group===CV.group);}
 function beginVocabQuiz(words){
- CV.pool=shuffle(words||vocabWords()).slice(0,10);CV.view='quiz';CV.pos=0;CV.answers=[];CV.choice=null;CV.opts=[];drawClimateVocab();
+ CV.pool=shuffle(words||vocabWords());CV.view='quiz';CV.pos=0;CV.answers=[];CV.choice=null;CV.opts=[];drawClimateVocab();
 }
 function vocabAnswer(id){
  if(CV.choice!==null)return;
@@ -885,7 +885,7 @@ function drawClimateVocab(){
  let content='';
  if(CV.view==='learn'){
   const w=words[CV.pos];
-  content=`<p class="vocab-count">${CV.pos+1} / ${words.length}</p><article class="vocab-flash"><div class="big"><strong lang="ca" class="word">${esc(w.ca)}</strong>${SPEAK(w.ca)}</div><p lang="uk" class="vocab-translation">${esc(w.ua)}</p>${pair(w.def,w.du)}</article><div class="row">${button('vocab-prev','← Anterior','Попереднє')}${button('vocab-next','Següent →','Наступне')}</div>${pair('Llegeix la paraula i el significat, després digues la traducció sense mirar.','Прочитай слово й пояснення, потім назви переклад, не підглядаючи.')}<button class="next" id="vocab-begin">Entrena · Тренування до 10 слів →</button>`;
+  content=`<p class="vocab-count">${CV.pos+1} / ${words.length}</p><article class="vocab-flash"><div class="big"><strong lang="ca" class="word">${esc(w.ca)}</strong>${SPEAK(w.ca)}</div><p lang="uk" class="vocab-translation">${esc(w.ua)}</p>${pair(w.def,w.du)}</article><div class="row">${button('vocab-prev','← Anterior','Попереднє')}${button('vocab-next','Següent →','Наступне')}</div>${pair('Llegeix la paraula i el significat, després digues la traducció sense mirar.','Прочитай слово й пояснення, потім назви переклад, не підглядаючи.')}<button class="next" id="vocab-begin">Entrena · Тренування всіх ${words.length} слів →</button>`;
  }else if(CV.view==='dictionary'){
   content=`<label for="vocab-search">Cerca · Пошук слова</label><input id="vocab-search" type="search" value="${esc(CV.query)}" placeholder="clima, дощ, alzina…"><div class="vocab-glossary">${words.filter(w=>(w.ca+' '+w.ua+' '+w.def+' '+w.du).toLocaleLowerCase().includes(CV.query.toLocaleLowerCase())).map(w=>`<article><div class="vocab-term"><b lang="ca">${esc(w.ca)}</b>${SPEAK(w.ca)}</div><p lang="uk" class="vocab-translation">${esc(w.ua)}</p>${pair(w.def,w.du)}</article>`).join('')||'<p lang="uk">Нічого не знайдено.</p>'}</div>`;
  }else if(CV.view==='quiz'){
@@ -896,9 +896,9 @@ function drawClimateVocab(){
   const ok=CV.answers.filter(a=>a.ok).length,total=CV.answers.length,errors=CV.answers.filter(a=>!a.ok).map(a=>CLIMATE_VOCAB.find(w=>w.id===a.id));
   const stars=ok===total?3:ok/total>=.8?2:1,k=l.id+'.vocab';
   if(stars>(best[k]||0)){best[k]=stars;store.set('apren-best',best)}
-  content=`<div class="vocab-score">${starsHtml(stars)}<h3>${ok} / ${total}</h3></div>${pair('Cada sessió entrena una part del vocabulari.','Кожне тренування охоплює частину словника.')}<p lang="uk">Для повторення всіх слів змінюй тему й напрям перекладу.</p>${errors.length?`<h3>Repassa · Повтори</h3><div class="vocab-glossary">${errors.map(w=>`<article>${pair(w.ca,w.ua)}</article>`).join('')}</div><button class="next" id="vocab-errors">Repassa els errors · Повторити помилки (${errors.length})</button>`:pair('Molt bé! Prova també l’altra direcció.','Чудово! Спробуй також інший напрям перекладу.')}<button class="ghost" id="vocab-begin">Una altra sessió · Ще одне тренування</button>`;
+  content=`<div class="vocab-score">${starsHtml(stars)}<h3>${ok} / ${total}</h3></div>${pair('Has practicat totes les paraules d’aquesta sessió.','Ти пройшла всі слова цього тренування.')}${errors.length?`<h3>Repassa · Повтори</h3><div class="vocab-glossary">${errors.map(w=>`<article>${pair(w.ca,w.ua)}</article>`).join('')}</div><button class="next" id="vocab-errors">Repassa els errors · Повторити помилки (${errors.length})</button>`:pair('Molt bé! Prova també l’altra direcció.','Чудово! Спробуй також інший напрям перекладу.')}<button class="ghost" id="vocab-begin">Una altra sessió · Ще одне тренування</button>`;
  }
- $screen.innerHTML=`<div class="card climate-vocab"><div class="row vocab-top">${button('vocab-menu','← Torna a la lliçó','До уроку')}<h2>7 · Vocabulari<span class="ua theory-ua" lang="uk">Словник і тренування</span></h2></div><p class="ua">${CLIMATE_VOCAB.length} слів · ${CLIMATE_VOCAB_GROUPS.length} тем · короткі тренування</p><nav class="vocab-tabs" aria-label="Режими словника">${button('vocab-learn','Aprèn','Вивчення')}${button('vocab-train','Entrena','Тренування')}${button('vocab-dict','Diccionari','Словник')}</nav><div class="vocab-controls"><div><label for="vocab-group">Tema · Тема</label><select id="vocab-group"><option value="all">Totes · Усі слова (${CLIMATE_VOCAB.length})</option>${CLIMATE_VOCAB_GROUPS.map(g=>`<option value="${g.id}">${g.ca} · ${g.ua} (${CLIMATE_VOCAB.filter(w=>w.group===g.id).length})</option>`).join('')}</select></div><div><label for="vocab-direction">Traducció · Напрям перекладу</label><select id="vocab-direction"><option value="ca-uk">Català → Українська</option><option value="uk-ca">Українська → Català</option></select></div></div><div class="vocab-content">${content}</div></div>`;
+ $screen.innerHTML=`<div class="card climate-vocab"><div class="row vocab-top">${button('vocab-menu','← Torna a la lliçó','До уроку')}<h2>7 · Vocabulari<span class="ua theory-ua" lang="uk">Словник і тренування</span></h2></div><p class="ua">${CLIMATE_VOCAB.length} слів · ${CLIMATE_VOCAB_GROUPS.length} тем · усі слова вибраної теми</p><nav class="vocab-tabs" aria-label="Режими словника">${button('vocab-learn','Aprèn','Вивчення')}${button('vocab-train','Entrena','Тренування')}${button('vocab-dict','Diccionari','Словник')}</nav><div class="vocab-controls"><div><label for="vocab-group">Tema · Тема</label><select id="vocab-group"><option value="all">Totes · Усі слова (${CLIMATE_VOCAB.length})</option>${CLIMATE_VOCAB_GROUPS.map(g=>`<option value="${g.id}">${g.ca} · ${g.ua} (${CLIMATE_VOCAB.filter(w=>w.group===g.id).length})</option>`).join('')}</select></div><div><label for="vocab-direction">Traducció · Напрям перекладу</label><select id="vocab-direction"><option value="ca-uk">Català → Українська</option><option value="uk-ca">Українська → Català</option></select></div></div><div class="vocab-content">${content}</div></div>`;
  document.getElementById('vocab-menu').onclick=()=>lesson(CV.si,CV.li);
  document.getElementById('vocab-learn').onclick=()=>{CV.view='learn';CV.pos=0;drawClimateVocab()};
  document.getElementById('vocab-dict').onclick=()=>{CV.view='dictionary';CV.query='';drawClimateVocab()};
